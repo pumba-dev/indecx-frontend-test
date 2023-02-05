@@ -41,7 +41,7 @@ O projeto está em desenvolvimento, então as próximas atualizações serão vo
 - [x] Configurar Ambiente de Desenvolvimento.
 - [x] Configurar Estrutura e Assets do Projeto.
 - [x] Instalar Bibliotecas [Vuelidate, Axios, Vuetify].
-- [-] Implementar Tela de Login.
+- [ ] Implementar Tela de Login.
 - [ ] Implementar Services da API.
 - [ ] Implementar Tela de Redefinir Senha.
 - [ ] Implementar Tela de Listagem de Produtos.
