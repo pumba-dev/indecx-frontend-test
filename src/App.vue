@@ -1,13 +1,12 @@
 <template>
   <v-app style="position: relative">
-    <LoginPage></LoginPage>
+    <router-view></router-view>
 
     <NotifySystem></NotifySystem>
   </v-app>
 </template>
 
 <script setup>
-import LoginPage from "@/components/LoginPage.vue";
 import NotifySystem from "@/components/general/notify-system/NotifySystem.vue";
 </script>
 

@@ -1,27 +1,16 @@
 <template>
   <MainCard>
-    <v-img
-      width="220"
-      class="mb-15"
-      src="@/assets/general/indecx-logomarca.svg"
-    />
+    <CardHeader
+      title="Login"
+      subtitle="Bem-vindo de volta! Por favor insira seus dados."
+    ></CardHeader>
 
-    <h1 class="text-h5 font-weight-bold align-self-start mb-2">Login</h1>
-    <span class="text-subtitle-2 align-self-start mb-9">
-      Bem-vindo de volta! Por favor insira seus dados.
-    </span>
-
-    <v-form
-      @submit.prevent
-      class="w-100 d-flex flex-column"
-      @keydown.enter="submitLogin"
-    >
+    <CardForm>
       <p class="font-weight-bold text-secondary mb-2">Email</p>
       <v-text-field
         required
         variant="outlined"
         :error="v$.$error"
-        @blur="v$.email.$touch"
         v-model.trim="loginFieldsData.email"
         placeholder="Digite o seu e-mail"
       ></v-text-field>
@@ -31,7 +20,6 @@
         required
         variant="outlined"
         :error="v$.$error"
-        @blur="v$.password.$touch"
         placeholder="Insira a sua senha"
         v-model="loginFieldsData.password"
         :type="showPasswordField ? 'text' : 'password'"
@@ -42,9 +30,9 @@
       ></v-text-field>
 
       <v-btn
-        type="submit"
         variant="text"
         class="align-self-end text-primary text-subtitle-1 mb-5"
+        @click.prevent="pushToForgotPasswordRoute"
         >Esqueci minha senha ></v-btn
       >
 
@@ -56,22 +44,26 @@
         @click.prevent="submitLogin"
         >Entrar</v-btn
       >
-    </v-form>
+    </CardForm>
   </MainCard>
 </template>
 
 <script setup>
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 import useVuelidate from "@vuelidate/core";
 import { reactive, ref, computed } from "vue";
 import { required, email } from "@vuelidate/validators";
-import MainCard from "@/components/general/MainCard.vue";
+import MainCard from "@/components/general/main-card/MainCard.vue";
+import CardForm from "@/components/general/main-card/CardForm.vue";
+import CardHeader from "@/components/general/main-card/CardHeader.vue";
 
 const loginFieldsData = reactive({
   email: "",
   password: "",
 });
 
+const router = useRouter();
 const store = useStore();
 const showPasswordField = ref(false);
 const loginIsLoading = ref(false);
@@ -112,6 +104,10 @@ function parseLoginFieldsDataToAPI() {
     login: loginFieldsData.email,
     password: loginFieldsData.password,
   };
+}
+
+function pushToForgotPasswordRoute() {
+  router.push({ name: "forgot-password" });
 }
 </script>
 
