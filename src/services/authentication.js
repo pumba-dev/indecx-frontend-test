@@ -1,13 +1,12 @@
+import { auth } from "@/plugins/firebase";
 import {
-  getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
 
-const auth = getAuth();
-
 export default {
   create: (email, password) => {
+    console.log(email, password);
     return createUserWithEmailAndPassword(auth, email, password);
   },
   singIn: (email, password) => {

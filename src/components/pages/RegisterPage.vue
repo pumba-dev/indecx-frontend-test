@@ -32,6 +32,7 @@
 
 <script setup>
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 import useVuelidate from "@vuelidate/core";
 import { reactive, ref, computed } from "vue";
 import { required, email } from "@vuelidate/validators";
@@ -52,6 +53,7 @@ const loginFieldsData = reactive({
 });
 
 const store = useStore();
+const router = useRouter();
 const registerIsLoading = ref(false);
 
 const loginRules = computed(() => ({
@@ -77,6 +79,12 @@ async function submitAccountRegister() {
       .create(loginFieldsData.email, loginFieldsData.password)
       .then((response) => {
         console.log("Succes Create User: ", response);
+        store.dispatch("notifySystem/create", {
+          text: "Novo usuário cadastrado com sucesso.",
+          iconSrc: "sucess-icon",
+        });
+
+        router.push("login");
       })
       .catch((error) => {
         console.log("Failed Create User: ", error);
@@ -90,9 +98,9 @@ async function submitAccountRegister() {
       text: "Verifique os seus dados e tente novamente.",
       iconSrc: "error-icon",
     });
-  }
 
-  registerIsLoading.value = false;
+    registerIsLoading.value = false;
+  }
 }
 </script>
 
