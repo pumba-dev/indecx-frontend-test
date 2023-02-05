@@ -8,7 +8,7 @@
 
 <h2 align="center">☕ Projeto Em Andamento</h2>
 
-<img src="./public/homepage-screenshot.png" alt="Imagem da Home do Site."/>
+<img src="./src/assets/general/homepage-screenshot.png" alt="Imagem da Home do Site."/>
 
 > www.pumbadev.com - Página Web Vue 3 Desenvolvida como Teste Front-End Pleno.
 
