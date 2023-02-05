@@ -27,4 +27,7 @@ export default createVuetify({
       },
     },
   },
+  icons: {
+    error: "@/assets/icons/error-icon.svg",
+  },
 });

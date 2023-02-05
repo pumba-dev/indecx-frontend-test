@@ -61,10 +61,10 @@
 </template>
 
 <script setup>
-import { reactive, ref, computed } from "vue";
+import { useStore } from "vuex";
 import useVuelidate from "@vuelidate/core";
+import { reactive, ref, computed } from "vue";
 import { required, email } from "@vuelidate/validators";
-
 import MainCard from "@/components/general/MainCard.vue";
 
 const loginFieldsData = reactive({
@@ -72,6 +72,7 @@ const loginFieldsData = reactive({
   password: "",
 });
 
+const store = useStore();
 const showPasswordField = ref(false);
 const loginIsLoading = ref(false);
 
@@ -96,6 +97,11 @@ async function submitLogin() {
     const parsedFieldsData = parseLoginFieldsDataToAPI();
 
     console.log(parsedFieldsData);
+  } else {
+    store.dispatch("notifySystem/create", {
+      text: "Verifique os seus dados e tente novamente.",
+      iconSrc: "error-icon",
+    });
   }
 
   loginIsLoading.value = false;
