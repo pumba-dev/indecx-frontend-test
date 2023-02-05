@@ -1,9 +1,11 @@
 <template>
   <v-app>
-    <h1>Hello World!</h1>
+    <LoginPage></LoginPage>
   </v-app>
 </template>
 
-<script></script>
+<script setup>
+import LoginPage from "@/components/LoginPage.vue";
+</script>
 
 <style></style>
