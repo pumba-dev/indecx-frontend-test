@@ -6,25 +6,22 @@
     ></CardHeader>
 
     <CardForm>
-      <p class="font-weight-bold text-secondary mb-2">
-        Informe o email cadastrado
-      </p>
-      <v-text-field
-        required
-        variant="outlined"
+      <InputLabel>Informe o email cadastrado</InputLabel>
+      <EmailInput
         :error="v$.$error"
         v-model.trim="loginFieldsData.email"
         placeholder="Digite o seu e-mail"
-      ></v-text-field>
+      ></EmailInput>
 
-      <v-btn
-        type="submit"
+      <BlockButton
         :loading="loginIsLoading"
-        block
-        class="bg-primary fill-height rounded h-10 pa-4 font-weight-light text-capitalize"
         @click.prevent="submitForgotPassword"
-        >Enviar código</v-btn
+        >Enviar código</BlockButton
       >
+
+      <TextButton @click.prevent="$router.push('login')">{{
+        "Voltar <"
+      }}</TextButton>
     </CardForm>
   </MainCard>
 </template>
@@ -35,8 +32,12 @@ import useVuelidate from "@vuelidate/core";
 import { reactive, ref, computed } from "vue";
 import { required, email } from "@vuelidate/validators";
 import MainCard from "@/components/general/main-card/MainCard.vue";
-import CardHeader from "../general/main-card/CardHeader.vue";
-import CardForm from "../general/main-card/CardForm.vue";
+import CardHeader from "@/components/general/main-card/CardHeader.vue";
+import CardForm from "@/components/general/main-card/CardForm.vue";
+import InputLabel from "@/components/general/forms/InputLabel.vue";
+import EmailInput from "@/components/general/forms/EmailInput.vue";
+import BlockButton from "@/components/general/buttons/BlockButton.vue";
+import TextButton from "@/components/general/buttons/TextButton.vue";
 
 const loginFieldsData = reactive({
   email: "",
@@ -60,7 +61,7 @@ async function submitForgotPassword() {
   const formIsValid = await v$.value.$validate();
 
   if (formIsValid) {
-    const parsedFieldsData = parseLoginFieldsDataToAPI();
+    const parsedFieldsData = parseFieldsDataToAPI();
 
     console.log(parsedFieldsData);
   } else {
@@ -73,7 +74,7 @@ async function submitForgotPassword() {
   loginIsLoading.value = false;
 }
 
-function parseLoginFieldsDataToAPI() {
+function parseFieldsDataToAPI() {
   return {
     login: loginFieldsData.email,
   };

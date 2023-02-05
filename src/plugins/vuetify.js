@@ -1,10 +1,6 @@
-// Styles
 import "vuetify/styles";
 import "@mdi/font/css/materialdesignicons.css";
-// import lightColorTheme from "@/theme/light-colors-theme.js";
-// import darkColorTheme from "@/theme/dark-colors-theme.js";
 
-// Vuetify
 import { createVuetify } from "vuetify";
 
 export default createVuetify({
@@ -26,8 +22,5 @@ export default createVuetify({
         },
       },
     },
-  },
-  icons: {
-    error: "@/assets/icons/error-icon.svg",
   },
 });
