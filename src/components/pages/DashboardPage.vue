@@ -1,9 +1,11 @@
 <template>
-  <h1>Dashboard</h1>
+  <DashboardHeader></DashboardHeader>
+
+  <v-main> Main </v-main>
 </template>
 
-<script>
-export default {};
+<script setup>
+import DashboardHeader from "../dashboard/DashboardHeader.vue";
 </script>
 
 <style></style>
