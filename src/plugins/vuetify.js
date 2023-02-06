@@ -19,6 +19,7 @@ export default createVuetify({
           "light-secondary": "#96EABD",
           "primary-text": "#242424",
           "secondary-text": "#5E5E5E",
+          border: "#D9E0E6",
         },
       },
     },

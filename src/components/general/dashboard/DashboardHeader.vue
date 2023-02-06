@@ -1,5 +1,6 @@
 <template>
   <v-app-bar
+    style="position: static"
     class="elevation-1 d-flex flex-row align-center justify-space-between"
     height="70"
   >

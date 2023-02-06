@@ -1,5 +1,5 @@
 <template>
-  <v-app style="position: relative">
+  <v-app>
     <router-view></router-view>
 
     <NotifySystem></NotifySystem>
