@@ -6,16 +6,16 @@
     ></CardHeader>
 
     <CardForm>
-      <InputLabel>Email</InputLabel>
+      <InputLabel fontWeight="bold">Email</InputLabel>
       <EmailInput
-        :error="v$.$error"
+        :error="v$.email.$error"
         v-model.trim="loginFieldsData.email"
         placeholder="Digite o seu e-mail"
       ></EmailInput>
 
-      <InputLabel>Senha</InputLabel>
+      <InputLabel font-weight="bold">Senha</InputLabel>
       <PasswordInput
-        :error="v$.$error"
+        :error="v$.password.$error"
         placeholder="Insira a sua senha"
         v-model="loginFieldsData.password"
       ></PasswordInput>
