@@ -24,7 +24,9 @@ export default {
   },
   actions: {
     create({ commit }, payload) {
-      commit("addNotify", payload);
+      const notify = payload.type ? payload : { type: "right", ...payload };
+
+      commit("addNotify", notify);
 
       setTimeout(() => {
         commit("removeFirstNotify");

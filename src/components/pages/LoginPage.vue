@@ -99,12 +99,14 @@ async function submitLogin() {
             break;
         }
         store.dispatch("notifySystem/create", {
+          type: "left",
           text: errorMsg,
           iconSrc: "error-icon",
         });
       });
   } else {
     store.dispatch("notifySystem/create", {
+      type: "left",
       text: "Verifique os seus dados e tente novamente.",
       iconSrc: "error-icon",
     });
