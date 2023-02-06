@@ -9,6 +9,7 @@
     :append-inner-icon="
       showPasswordField ? 'mdi-eye-outline' : 'mdi-eye-off-outline'
     "
+    density="compact"
   ></v-text-field>
 </template>
 

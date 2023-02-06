@@ -4,6 +4,7 @@
     variant="outlined"
     :error="error"
     :placeholder="placeholder"
+    density="compact"
   ></v-text-field>
 </template>
 
