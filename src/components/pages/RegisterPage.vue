@@ -22,6 +22,7 @@
 
       <BlockButton
         :loading="registerIsLoading"
+        :disabled="registerIsLoading"
         @click.prevent="submitAccountRegister"
         >Cadastrar</BlockButton
       >
@@ -92,13 +93,13 @@ async function submitAccountRegister() {
           text: "Erro interno ao registrar novo usuário no sistema.",
           iconSrc: "error-icon",
         });
+        registerIsLoading.value = false;
       });
   } else {
     store.dispatch("notifySystem/create", {
       text: "Verifique os seus dados e tente novamente.",
       iconSrc: "error-icon",
     });
-
     registerIsLoading.value = false;
   }
 }

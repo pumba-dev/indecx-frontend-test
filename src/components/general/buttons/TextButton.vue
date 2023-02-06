@@ -1,5 +1,5 @@
 <template>
-  <v-btn variant="text" :class="`align-self-end text-${color} text-subtitle-1`"
+  <v-btn variant="text" :class="`text-${color} text-subtitle-1`"
     ><slot></slot
   ></v-btn>
 </template>

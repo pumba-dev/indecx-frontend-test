@@ -20,12 +20,21 @@
         v-model="loginFieldsData.password"
       ></PasswordInput>
 
-      <TextButton @click.prevent="$router.push('forgot-password')"
+      <TextButton
+        class="align-self-end"
+        @click.prevent="$router.push('forgot-password')"
         >Esqueci minha senha ></TextButton
       >
 
-      <BlockButton :loading="loginIsLoading" @click.prevent="submitLogin"
+      <BlockButton
+        :loading="loginIsLoading"
+        :disabled="loginIsLoading"
+        @click.prevent="submitLogin"
         >Entrar</BlockButton
+      >
+
+      <TextButton @click.prevent="$router.push('register')"
+        >Não tem uma conta? Cadastre-se aqui!</TextButton
       >
     </CardForm>
   </MainCard>
@@ -103,6 +112,7 @@ async function submitLogin() {
           text: errorMsg,
           iconSrc: "error-icon",
         });
+        loginIsLoading.value = false;
       });
   } else {
     store.dispatch("notifySystem/create", {
@@ -110,9 +120,9 @@ async function submitLogin() {
       text: "Verifique os seus dados e tente novamente.",
       iconSrc: "error-icon",
     });
-  }
 
-  loginIsLoading.value = false;
+    loginIsLoading.value = false;
+  }
 }
 </script>
 
