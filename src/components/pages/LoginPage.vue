@@ -33,6 +33,7 @@
 
 <script setup>
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 import useVuelidate from "@vuelidate/core";
 import { reactive, ref, computed } from "vue";
 import { required, email } from "@vuelidate/validators";
@@ -50,6 +51,7 @@ const loginFieldsData = reactive({
   password: "",
 });
 
+const router = useRouter();
 const store = useStore();
 const loginIsLoading = ref(false);
 
@@ -71,9 +73,36 @@ async function submitLogin() {
   const formIsValid = await v$.value.$validate();
 
   if (formIsValid) {
-    const parsedFieldsData = parseFieldsDataToAPI();
-
-    console.log(parsedFieldsData);
+    console.log(loginFieldsData.email, loginFieldsData.password);
+    store
+      .dispatch("authSystem/singIn", {
+        email: loginFieldsData.email,
+        password: loginFieldsData.password,
+      })
+      .then(() => {
+        router.push("dashboard");
+      })
+      .catch((error) => {
+        let errorMsg;
+        switch (error.code) {
+          case "auth/invalid-email":
+            errorMsg = "O email inserido não é válido.";
+            break;
+          case "auth/user-not-found":
+            errorMsg = "Nenhuma conta com esse email foi encontrada.";
+            break;
+          case "auth/wrong-password":
+            errorMsg = "A senha inserida está incorreta.";
+            break;
+          default:
+            errorMsg = "O email ou a senha inserida está incorreta.";
+            break;
+        }
+        store.dispatch("notifySystem/create", {
+          text: errorMsg,
+          iconSrc: "error-icon",
+        });
+      });
   } else {
     store.dispatch("notifySystem/create", {
       text: "Verifique os seus dados e tente novamente.",
@@ -82,13 +111,6 @@ async function submitLogin() {
   }
 
   loginIsLoading.value = false;
-}
-
-function parseFieldsDataToAPI() {
-  return {
-    login: loginFieldsData.email,
-    password: loginFieldsData.password,
-  };
 }
 </script>
 
