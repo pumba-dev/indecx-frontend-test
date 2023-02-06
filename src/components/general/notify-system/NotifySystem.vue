@@ -2,7 +2,7 @@
   <v-list
     lines="two"
     class="bg-transparent mx-5 my-15"
-    style="position: absolute; bottom: 0; left: 0"
+    style="position: absolute; bottom: 0; left: 0; z-index: 3000"
   >
     <NotifyCard
       :key="index"
