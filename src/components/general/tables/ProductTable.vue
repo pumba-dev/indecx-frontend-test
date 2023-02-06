@@ -15,12 +15,9 @@
         ></v-text-field>
       </v-responsive>
 
-      <v-btn
-        @click.prevent="$emit('createItem')"
-        class="text-body-2 font-weight-light bg-primary px-5"
-      >
+      <DashboardButton @click.prevent="$emit('createItem')">
         Criar Produto
-      </v-btn>
+      </DashboardButton>
     </v-row>
 
     <!-- Table List -->
@@ -106,6 +103,7 @@
 <script setup>
 import { defineProps, ref } from "vue";
 import TableNaviButton from "@/components/general/buttons/TableNaviButton";
+import DashboardButton from "@/components/general/buttons/DashboardButton.vue";
 
 defineProps({
   headers: {
@@ -125,7 +123,7 @@ function searchOnTable() {
 }
 </script>
 
-<style>
+<style scoped>
 p {
   border-right: 1px solid rgba(1, 1, 1, 0.2) !important;
 }

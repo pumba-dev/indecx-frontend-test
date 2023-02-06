@@ -1,4 +1,12 @@
 <template>
+  <v-overlay contained v-model="showModal" class="align-center justify-center">
+    <component
+      v-if="showModal"
+      :is="currentModal"
+      @closeModal="modals.closeModal"
+    ></component>
+  </v-overlay>
+
   <DashboardHeader></DashboardHeader>
 
   <v-main class="bg-background pa-6 d-flex flex-column">
@@ -12,9 +20,10 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, shallowRef } from "vue";
 import DashboardHeader from "../general/dashboard/DashboardHeader.vue";
 import ProductTable from "../general/tables/ProductTable.vue";
+import CreateProductModal from "@/components/general/modal/CreateProductModal.vue";
 
 const tableHeaders = ref([
   {
@@ -90,9 +99,19 @@ const tableItems = ref([
   },
 ]);
 
+const currentModal = shallowRef(null);
+const showModal = ref(false);
+
 const modals = {
   openCreateModal: () => {
     console.log("Open Create Modal");
+    currentModal.value = CreateProductModal;
+    showModal.value = true;
+  },
+  closeModal: () => {
+    console.log("Close All Modals");
+    currentModal.value = null;
+    showModal.value = false;
   },
 };
 </script>
