@@ -28,6 +28,7 @@ import DashboardHeader from "../general/dashboard/DashboardHeader.vue";
 import ProductTable from "../general/tables/ProductTable.vue";
 import CreateProductModal from "@/components/general/modal/CreateProductModal.vue";
 import EditProductModal from "@/components/general/modal/EditProductModal.vue";
+import DeleteProductModal from "@/components/general/modal/DeleteProductModal.vue";
 // import productsMock from "@/utils/productsMock";
 import productService from "@/services/products";
 
@@ -61,7 +62,12 @@ const modals = {
     currentModal.value = EditProductModal;
     showModal.value = true;
   },
-
+  openDeleteModal: (item) => {
+    console.log("Open Delete Modal");
+    currentModalItem.value = item;
+    currentModal.value = DeleteProductModal;
+    showModal.value = true;
+  },
   closeModal: () => {
     console.log("Close All Modals");
     currentModal.value = null;

@@ -1,13 +1,14 @@
-import { db } from "@/plugins/firebase";
 import {
-  collection,
+  doc,
   query,
   where,
   setDoc,
   getDocs,
   updateDoc,
-  doc,
+  deleteDoc,
+  collection,
 } from "firebase/firestore";
+import { db } from "@/plugins/firebase";
 import localStorage from "@/utils/localStorage";
 
 export default {
@@ -27,5 +28,9 @@ export default {
   edit: async (newProductData) => {
     const productsRef = doc(db, "products", newProductData.id);
     return updateDoc(productsRef, newProductData);
+  },
+  delete: async (productID) => {
+    const productsRef = doc(db, "products", productID);
+    return await deleteDoc(productsRef);
   },
 };
