@@ -24,10 +24,12 @@ import { ref, shallowRef, onMounted } from "vue";
 import DashboardHeader from "../general/dashboard/DashboardHeader.vue";
 import ProductTable from "../general/tables/ProductTable.vue";
 import CreateProductModal from "@/components/general/modal/CreateProductModal.vue";
-import productsMock from "@/utils/productsMock";
+// import productsMock from "@/utils/productsMock";
+import productService from "@/services/products";
 
 onMounted(() => {
-  tableItems.value = productsMock;
+  // tableItems.value = productsMock;
+  getProductsFromAPI();
 });
 
 const tableHeaders = ref([
@@ -56,8 +58,23 @@ const modals = {
     console.log("Close All Modals");
     currentModal.value = null;
     showModal.value = false;
+    getProductsFromAPI();
   },
 };
+
+function getProductsFromAPI() {
+  productService
+    .getAll()
+    .then((response) => {
+      tableItems.value = [];
+      response.forEach((doc) => {
+        tableItems.value.push(doc.data());
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
 </script>
 
 <style></style>

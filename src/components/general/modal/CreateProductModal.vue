@@ -77,16 +77,16 @@
 <script setup>
 import { useStore } from "vuex";
 import useVuelidate from "@vuelidate/core";
-import { db, auth } from "@/plugins/firebase";
 import { reactive, defineEmits, ref } from "vue";
 import { required } from "@vuelidate/validators";
-import { collection, addDoc } from "firebase/firestore";
+
 import InputLabel from "@/components/general/forms/InputLabel.vue";
 import TextInput from "@/components/general/forms/TextInput.vue";
 import DashboardButton from "@/components/general/buttons/DashboardButton.vue";
 import DefaultSelect from "../forms/DefaultSelect.vue";
 import productTypesOptions from "@/utils/productTypesOptions";
 import randomString from "@/utils/randomString";
+import productService from "@/services/products";
 
 const createIsLoading = ref(false);
 const store = useStore();
@@ -122,7 +122,8 @@ async function createProduct() {
     const parsedAPIData = parseDataToAPI();
     console.log("Create New Product Data: ", parsedAPIData);
 
-    addDoc(collection(db, "products"), parsedAPIData)
+    productService
+      .create(parsedAPIData)
       .then((response) => {
         console.log("Document written with ID: ", response);
 
@@ -146,11 +147,8 @@ async function createProduct() {
 }
 
 function parseDataToAPI() {
-  const userUID = auth.currentUser.uid;
   const randomID = randomString(6);
-
   return {
-    key: userUID,
     id: randomID,
     name: productFieldsData.name,
     price: productFieldsData.price,

@@ -20,4 +20,7 @@ export default {
   resetPassword: (submitCode, newPassword) => {
     return confirmPasswordReset(auth, submitCode, newPassword);
   },
+  hasAuthenticatedUser: () => {
+    return auth.currentUser;
+  },
 };

@@ -188,8 +188,6 @@ const navigation = {
     }
   },
   goPage: (newPage) => {
-    console.log(totalOfPages.value);
-
     if (newPage > 0 && newPage <= totalOfPages.value) {
       currentPage.value = newPage;
     }
