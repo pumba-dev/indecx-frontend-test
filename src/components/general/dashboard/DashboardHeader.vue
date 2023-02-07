@@ -17,12 +17,14 @@
     <v-spacer></v-spacer>
 
     <div class="d-flex flex-row align-center">
-      <v-icon
+      <!-- <v-icon
         style="cursor: pointer"
         class="mx-4"
         icon="mdi-cog-outline"
         @click="$emit('open-profile-settings')"
-      ></v-icon>
+      ></v-icon> -->
+
+      <ProfileSettings></ProfileSettings>
 
       <v-divider vertical class="mx-2"></v-divider>
 
@@ -33,7 +35,8 @@
 
 <script setup>
 import openIndeCXWebPage from "@/utils/openIndeCXWebPage";
-import ProfileDataCard from "./ProfileDataCard.vue";
+import ProfileSettings from "@/components/general/menu/ProfileSettings.vue";
+import ProfileDataCard from "@/components/general/dashboard/ProfileDataCard.vue";
 </script>
 
 <style></style>
