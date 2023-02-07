@@ -16,6 +16,7 @@
     "firebase": "^9.17.1",
     "roboto-fontface": "*",
     "vue": "^3.2.13",
+    "vue-currency-input": "^3.0.3",
     "vue-router": "^4.1.6",
     "vuetify": "^3.0.0-beta.0",
     "vuex": "^4.0.2",

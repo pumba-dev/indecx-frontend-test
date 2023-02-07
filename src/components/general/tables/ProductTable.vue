@@ -52,7 +52,7 @@
             :key="index"
             v-for="(header, index) in headers"
           >
-            {{ item[header.key] }}
+            {{ verifyMask(item, header) }}
           </td>
           <td style="border: none" class="d-flex align-center">
             <v-row class="justify-center align-center">
@@ -137,6 +137,7 @@
 import { defineProps, ref, computed } from "vue";
 import TableNaviButton from "@/components/general/buttons/TableNaviButton";
 import DashboardButton from "@/components/general/buttons/DashboardButton.vue";
+import moneyFormat from "@/utils/moneyFormat";
 
 const props = defineProps({
   headers: {
@@ -261,6 +262,15 @@ const paginatedItemList = computed(() => {
     lastItemPageIndex.value
   );
 });
+
+function verifyMask(item, header) {
+  if (header.mask) {
+    switch (header.mask) {
+      case "money":
+        return moneyFormat(item[header.key]);
+    }
+  } else return item[header.key];
+}
 </script>
 
 <style scoped>

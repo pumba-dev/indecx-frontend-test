@@ -43,11 +43,11 @@
         <v-col>
           <InputLabel>Valor do produto</InputLabel>
           <v-responsive width="270">
-            <TextInput
+            <MoneyInput
               v-model="productFieldsData.price"
               :error="v$.price.$error"
               placeholder="R$"
-            ></TextInput>
+            ></MoneyInput>
           </v-responsive>
         </v-col>
       </v-row>
@@ -81,6 +81,7 @@ import { reactive, defineEmits, ref, defineProps, onMounted } from "vue";
 import { required } from "@vuelidate/validators";
 
 import InputLabel from "@/components/general/forms/InputLabel.vue";
+import MoneyInput from "@/components/general/forms/MoneyInput.vue";
 import TextInput from "@/components/general/forms/TextInput.vue";
 import DashboardButton from "@/components/general/buttons/DashboardButton.vue";
 import DefaultSelect from "../forms/DefaultSelect.vue";
@@ -103,7 +104,7 @@ const store = useStore();
 
 const productFieldsData = reactive({
   name: "",
-  price: "",
+  price: 0,
   type: undefined,
 });
 

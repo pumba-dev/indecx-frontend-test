@@ -43,11 +43,11 @@
         <v-col>
           <InputLabel>Valor do produto</InputLabel>
           <v-responsive width="270">
-            <TextInput
+            <MoneyInput
               v-model="productFieldsData.price"
               :error="v$.price.$error"
               placeholder="R$"
-            ></TextInput>
+            ></MoneyInput>
           </v-responsive>
         </v-col>
       </v-row>
@@ -87,6 +87,7 @@ import DefaultSelect from "../forms/DefaultSelect.vue";
 import productTypesOptions from "@/utils/productTypesOptions";
 import randomString from "@/utils/randomString";
 import productService from "@/services/products";
+import MoneyInput from "../forms/MoneyInput.vue";
 
 const createIsLoading = ref(false);
 const store = useStore();
@@ -95,7 +96,7 @@ const emit = defineEmits(["closeModal"]);
 
 const productFieldsData = reactive({
   name: "",
-  price: "",
+  price: 0,
   type: undefined,
 });
 

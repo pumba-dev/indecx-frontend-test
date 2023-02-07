@@ -41,7 +41,7 @@ const tableHeaders = ref([
   { key: "id", title: "ID" },
   { title: "Nome do Produto", key: "name" },
   { title: "Tipo do Produto", key: "type" },
-  { title: "Valor do Produto", key: "price" },
+  { title: "Valor do Produto", key: "price", mask: "money" },
 ]);
 
 const tableItems = ref([]);
