@@ -44,9 +44,9 @@ O projeto está em desenvolvimento, então as próximas atualizações serão vo
 - [x] Implementar Services da API.
 - [x] Implementar Tela de Login.
 - [ ] Implementar Tela de Redefinir Senha.
-- [ ] Implementar Tela de Listagem de Produtos.
+- [x] Implementar Tela de Listagem de Produtos.
 - [ ] Implementar Modal de Excluir Produto.
-- [ ] Implementar Modal de Criar Produto.
+- [x] Implementar Modal de Criar Produto.
 - [ ] Implementar Modal de Editar Produto.
 
 ## ⚙️ Instalando o Projeto
