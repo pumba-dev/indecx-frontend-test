@@ -4,14 +4,16 @@ import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
   confirmPasswordReset,
+  onAuthStateChanged,
 } from "firebase/auth";
+import localStorage from "@/utils/localStorage";
 
 export default {
   create: (email, password) => {
     console.log(email, password);
     return createUserWithEmailAndPassword(auth, email, password);
   },
-  singIn: (email, password) => {
+  singIn: async (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
   },
   sendPasswordResetEmail: (email) => {
@@ -21,6 +23,12 @@ export default {
     return confirmPasswordReset(auth, submitCode, newPassword);
   },
   hasAuthenticatedUser: () => {
-    return auth.currentUser;
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        localStorage.push("userUID", user.uid);
+      } else {
+        localStorage.push("userUID", null);
+      }
+    });
   },
 };
