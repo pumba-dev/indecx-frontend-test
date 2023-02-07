@@ -94,6 +94,12 @@ async function submitAccountRegister() {
           case "auth/email-already-in-use":
             errorMsg = "O email inserido já está em uso.";
             break;
+          case "auth/invalid-email":
+            errorMsg = "O email inserido não é um endereço válido.";
+            break;
+          case "auth/operation-not-allowed":
+            errorMsg = "Operação não permitida pelo servidor.";
+            break;
           case "auth/weak-password":
             errorMsg = "Senha inserida muito fraca, insira uma mais forte.";
             break;
