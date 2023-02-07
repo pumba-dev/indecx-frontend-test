@@ -7,6 +7,8 @@ import Register from "@/components/pages/RegisterPage.vue";
 import ForgotPassword from "@/components/pages/ForgotPasswordPage.vue";
 import Dashboard from "@/components/pages/DashboardPage.vue";
 
+import validations from "./router-validations";
+
 // Routes
 const routes = [
   // ######  BEFORE AUTHENTICATION ######
@@ -50,9 +52,10 @@ const router = createRouter({
   routes,
 });
 
-// // Router Validations
-// router.beforeEach((to) => {
-//   return routerValidations(to);
-// });
+// Router Validations
+router.beforeEach((to) => {
+  console.log("Before Enter Router");
+  return validations(to);
+});
 
 export default router;
