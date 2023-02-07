@@ -62,12 +62,14 @@
                 color="secondary-text"
                 style="cursor: pointer"
                 icon="mdi-pencil-outline"
+                @click.prevent="$emit('editItem', item)"
               ></v-icon>
               <v-icon
                 size="small"
                 color="secondary-text"
                 style="cursor: pointer"
                 icon="mdi-delete-outline"
+                @click.prevent="$emit('deleteItem', item)"
               ></v-icon>
             </v-row>
           </td>
