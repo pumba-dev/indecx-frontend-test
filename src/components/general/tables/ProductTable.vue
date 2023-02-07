@@ -147,7 +147,7 @@ const tableSearch = ref("");
 const currentPage = ref(1);
 
 const totalOfPages = computed(() => {
-  return parseInt(props.items.length / props.itemsPerPage) + 1;
+  return Math.ceil(props.items.length / props.itemsPerPage);
 });
 
 const firstItemPageIndex = computed(() => {
@@ -162,7 +162,7 @@ const navigationText = computed(() => {
   const firstItem = firstItemPageIndex.value + 1;
   const isLastPage = firstItem + props.itemsPerPage < props.items.length;
   const lastItem = isLastPage
-    ? firstItem + props.itemsPerPage
+    ? firstItem + props.itemsPerPage - 1
     : props.items.length;
 
   return `${firstItem}-${lastItem} de ${props.items.length} items`;

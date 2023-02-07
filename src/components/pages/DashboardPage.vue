@@ -20,10 +20,15 @@
 </template>
 
 <script setup>
-import { ref, shallowRef } from "vue";
+import { ref, shallowRef, onMounted } from "vue";
 import DashboardHeader from "../general/dashboard/DashboardHeader.vue";
 import ProductTable from "../general/tables/ProductTable.vue";
 import CreateProductModal from "@/components/general/modal/CreateProductModal.vue";
+import productsMock from "@/utils/productsMock";
+
+onMounted(() => {
+  tableItems.value = productsMock;
+});
 
 const tableHeaders = ref([
   {
@@ -36,80 +41,7 @@ const tableHeaders = ref([
   { title: "Valor do Produto", align: "start", key: "price" },
 ]);
 
-const tableItems = ref([
-  {
-    id: "FAEAFEE",
-    name: "Nome do Produto",
-    type: "Tipo 1",
-    price: 5000,
-  },
-  {
-    id: "AW2DWS",
-    name: "Nome do Produto",
-    type: "Tipo 3",
-    price: 5000,
-  },
-  {
-    id: "AW2DWS",
-    name: "Nome do Produto",
-    type: "Tipo 3",
-    price: 5000,
-  },
-  {
-    id: "AW2DWS",
-    name: "Nome do Produto",
-    type: "Tipo 3",
-    price: 5000,
-  },
-  {
-    id: "VASD2F",
-    name: "Nome do Produto",
-    type: "Tipo 3",
-    price: 5000,
-  },
-  {
-    id: "VDZVEG",
-    name: "Nome do Produto",
-    type: "Tipo 1",
-    price: 5000,
-  },
-  {
-    id: "KJKDS2",
-    name: "Nome do Produto",
-    type: "Tipo 2",
-    price: 5000,
-  },
-  {
-    id: "KJKDS2",
-    name: "Nome do Produto",
-    type: "Tipo 2",
-    price: 5000,
-  },
-  {
-    id: "KJKDS2",
-    name: "Nome do Produto",
-    type: "Tipo 2",
-    price: 5000,
-  },
-  {
-    id: "KJKDS2",
-    name: "Nome do Produto",
-    type: "Tipo 2",
-    price: 5000,
-  },
-  {
-    id: "KJKDS2",
-    name: "Nome do Produto",
-    type: "Tipo 2",
-    price: 5000,
-  },
-  {
-    id: "KJKDS2",
-    name: "Nome do Produto",
-    type: "Tipo 2",
-    price: 5000,
-  },
-]);
+const tableItems = ref([]);
 
 const currentModal = shallowRef(null);
 const showModal = ref(false);
