@@ -7,8 +7,8 @@
           v-model="tableSearch"
           variant="outlined"
           append-inner-icon="mdi-magnify"
-          @click:append-inner="searchOnTable"
-          @keypress.enter="searchOnTable"
+          @click:append-inner="tableSearch == $event.target.value"
+          @keypress.enter="tableSearch == $event.target.value"
           placeholder="Faça uma busca"
           density="compact"
           hide-details
@@ -244,12 +244,23 @@ const navNumbers = computed(() => {
   };
 });
 
-const paginatedItemList = computed(() => {
-  return props.items.slice(firstItemPageIndex.value, lastItemPageIndex.value);
+const filteredItemList = computed(() => {
+  if (tableSearch.value == "") return props.items;
+  navigation.goPage(1);
+  return props.items.filter((item) => {
+    const itemID = item.id.toLowerCase();
+    const itemName = item.name.toLowerCase();
+    const searchValue = tableSearch.value.trim().toLowerCase();
+    return itemID.includes(searchValue) || itemName.includes(searchValue);
+  });
 });
-function searchOnTable() {
-  console.log("search on table", tableSearch.value);
-}
+
+const paginatedItemList = computed(() => {
+  return filteredItemList.value.slice(
+    firstItemPageIndex.value,
+    lastItemPageIndex.value
+  );
+});
 </script>
 
 <style scoped>
