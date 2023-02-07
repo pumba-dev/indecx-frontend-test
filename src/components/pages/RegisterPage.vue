@@ -81,6 +81,7 @@ async function submitAccountRegister() {
       .then((response) => {
         console.log("Succes Create User: ", response);
         store.dispatch("notifySystem/create", {
+          type: "left",
           text: "Novo usuário cadastrado com sucesso.",
           iconSrc: "sucess-icon",
         });
@@ -88,15 +89,28 @@ async function submitAccountRegister() {
         router.push("login");
       })
       .catch((error) => {
-        console.log("Failed Create User: ", error);
+        let errorMsg;
+        switch (error.code) {
+          case "auth/email-already-in-use":
+            errorMsg = "O email inserido já está em uso.";
+            break;
+          case "auth/weak-password":
+            errorMsg = "Senha inserida muito fraca, insira uma mais forte.";
+            break;
+          default:
+            errorMsg = "Erro interno ao cadastrar usuário no sistema.";
+            break;
+        }
         store.dispatch("notifySystem/create", {
-          text: "Erro interno ao registrar novo usuário no sistema.",
+          type: "left",
+          text: errorMsg,
           iconSrc: "error-icon",
         });
         registerIsLoading.value = false;
       });
   } else {
     store.dispatch("notifySystem/create", {
+      type: "left",
       text: "Verifique os seus dados e tente novamente.",
       iconSrc: "error-icon",
     });

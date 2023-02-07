@@ -6,6 +6,7 @@ import Login from "@/components/pages/LoginPage.vue";
 import Register from "@/components/pages/RegisterPage.vue";
 import ForgotPassword from "@/components/pages/ForgotPasswordPage.vue";
 import Dashboard from "@/components/pages/DashboardPage.vue";
+import ResetPassword from "@/components/pages/ResetPasswordPage.vue";
 
 import validations from "./router-validations";
 
@@ -36,6 +37,15 @@ const routes = [
     path: "/forgot-password",
     name: "forgot-password",
     component: ForgotPassword,
+  },
+  {
+    path: "/reset-password/:",
+    name: "reset-password",
+    component: ResetPassword,
+    props: (route) => ({
+      mode: route.query.mode,
+      oobCode: route.query.oobCode,
+    }),
   },
 
   // After Authentication

@@ -117,7 +117,7 @@ async function submitLogin() {
   } else {
     store.dispatch("notifySystem/create", {
       type: "left",
-      text: "Verifique os seus dados e tente novamente.",
+      text: "Verifique os dados inseridos e tente novamente.",
       iconSrc: "error-icon",
     });
 
