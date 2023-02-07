@@ -45,9 +45,9 @@ O projeto está em desenvolvimento, então as próximas atualizações serão vo
 - [x] Implementar Tela de Login.
 - [x] Implementar Tela de Redefinir Senha.
 - [x] Implementar Tela de Listagem de Produtos.
-- [ ] Implementar Modal de Excluir Produto.
+- [x] Implementar Modal de Excluir Produto.
 - [x] Implementar Modal de Criar Produto.
-- [ ] Implementar Modal de Editar Produto.
+- [x] Implementar Modal de Editar Produto.
 
 ## ⚙️ Instalando o Projeto
 
