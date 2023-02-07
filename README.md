@@ -1,4 +1,4 @@
-# [🚀 IndeCX - Front End Test](https://pumbadev.com)
+# [🚀 IndeCX - Front End Test](https://indecx-frontend-test.web.app/)
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/pumba-dev/indecx-frontend-test?style=for-the-badge)
 ![GitHub language count](https://img.shields.io/github/languages/count/pumba-dev/indecx-frontend-test?style=for-the-badge)
@@ -10,7 +10,7 @@
 
 <img src="./src/assets/general/homepage-screenshot.png" alt="Imagem da Home do Site."/>
 
-> www.pumbadev.com - Página Web Vue 3 Desenvolvida como Teste Front-End Pleno.
+> https://indecx-frontend-test.web.app/ - Página Web Vue 3 Desenvolvida como Teste Front-End.
 
 <br>
 
@@ -40,7 +40,7 @@ O projeto está em desenvolvimento, então as próximas atualizações serão vo
 
 - [x] Configurar Ambiente de Desenvolvimento.
 - [x] Configurar Estrutura e Assets do Projeto.
-- [x] Instalar Bibliotecas [Vuelidate, Axios, Vuetify].
+- [x] Instalar Bibliotecas Iniciais [Vuelidate, Vuetify, ...].
 - [x] Implementar Services da API.
 - [x] Implementar Tela de Login.
 - [x] Implementar Tela de Redefinir Senha.
@@ -49,14 +49,25 @@ O projeto está em desenvolvimento, então as próximas atualizações serão vo
 - [x] Implementar Modal de Criar Produto.
 - [x] Implementar Modal de Editar Produto.
 
+## 💻 Pré-requisitos
+
+Antes de começar, verifique se você atende às seguintes dependências:
+
+- [`< Git >`](https://git-scm.com/)
+- [`< NodeJS >`](https://nodejs.org/en/)
+
 ## ⚙️ Instalando o Projeto
 
 Siga estas etapas:
 
 ```
+git clone https://github.com/pumba-dev/indecx-frontend-test.git
+
+cd indecx-frontend-test
+
 npm install
 
-npm run dev
+npm run serve
 ```
 
 ## 💻 Feito Com:
