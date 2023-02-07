@@ -28,23 +28,31 @@
 
 <script setup>
 import { ref } from "vue";
+import openProjectRepo from "@/utils/openProjectRepo";
+import { useRouter } from "vue-router";
+import { useStore } from "vuex";
+
+const store = useStore();
+const router = useRouter();
 
 const settingOptions = ref([
   { key: "edit-account", title: "Editar conta" },
-  { key: "open-project-repo", title: "Visualizar Repositório" },
+  { key: "open-project-repo", title: "Visualizar repositório" },
   { key: "sign-out", title: "Sair" },
 ]);
 
 function handleAction(key) {
+  console.log("handleAction", key);
   switch (key) {
     case "edit-account":
       console.log("edit-account");
       break;
     case "open-project-repo":
-      console.log("open-project-repo");
+      openProjectRepo();
       break;
-    case "sing-out":
-      console.log("sing-out");
+    case "sign-out":
+      store.dispatch("authSystem/signOut");
+      router.push("home");
       break;
   }
 }

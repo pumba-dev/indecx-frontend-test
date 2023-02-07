@@ -1,45 +1,31 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "@/plugins/firebase";
+import authService from "@/services/authentication";
 import localStorage from "@/utils/localStorage";
 
 export default {
   namespaced: true,
   state: {
-    token: "",
-    userData: {},
+    token: null,
   },
   getters: {
     getToken(state) {
       return state.token;
-    },
-    userData(state) {
-      return state.userData;
     },
   },
   mutations: {
     setToken(state, token) {
       state.token = token;
     },
-    setUserData(state, userData) {
-      state.userData = userData;
-    },
     deleteToken(state) {
-      state.token = "";
-    },
-    deleteUserData(state) {
-      state.userData = {};
+      state.token = null;
     },
   },
   actions: {
-    async singIn({ commit }, payload) {
-      console.log("singIn User", payload);
-      return signInWithEmailAndPassword(auth, payload.email, payload.password)
+    async signIn({ commit }, payload) {
+      console.log("signIn User", payload);
+      return authService
+        .signIn(payload.email, payload.password)
         .then((userCredential) => {
-          const user = userCredential.user.email;
           const token = userCredential.user.accessToken;
-          console.log("Logged User Token", token);
-
-          commit("setUserData", user);
           commit("setToken", token);
           localStorage.push("token", token);
 
@@ -52,6 +38,12 @@ export default {
           console.log("Login Error", errorMessage);
           throw error;
         });
+    },
+    async signOut({ commit }) {
+      localStorage.delete("token");
+      commit("setToken", "");
+      await authService.signOut();
+      return true;
     },
   },
 };

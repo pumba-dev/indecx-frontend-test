@@ -84,7 +84,7 @@ async function submitLogin() {
   if (formIsValid) {
     console.log(loginFieldsData.email, loginFieldsData.password);
     store
-      .dispatch("authSystem/singIn", {
+      .dispatch("authSystem/signIn", {
         email: loginFieldsData.email,
         password: loginFieldsData.password,
       })

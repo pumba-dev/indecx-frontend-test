@@ -5,6 +5,7 @@ import {
   sendPasswordResetEmail,
   confirmPasswordReset,
   onAuthStateChanged,
+  signOut,
 } from "firebase/auth";
 import localStorage from "@/utils/localStorage";
 
@@ -13,8 +14,11 @@ export default {
     console.log(email, password);
     return createUserWithEmailAndPassword(auth, email, password);
   },
-  singIn: async (email, password) => {
+  signIn: async (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
+  },
+  signOut: () => {
+    return signOut(auth);
   },
   sendPasswordResetEmail: (email) => {
     return sendPasswordResetEmail(auth, email);
