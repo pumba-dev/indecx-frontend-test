@@ -50,6 +50,18 @@ const tableItems = ref([
     price: 5000,
   },
   {
+    id: "AW2DWS",
+    name: "Nome do Produto",
+    type: "Tipo 3",
+    price: 5000,
+  },
+  {
+    id: "AW2DWS",
+    name: "Nome do Produto",
+    type: "Tipo 3",
+    price: 5000,
+  },
+  {
     id: "VASD2F",
     name: "Nome do Produto",
     type: "Tipo 3",

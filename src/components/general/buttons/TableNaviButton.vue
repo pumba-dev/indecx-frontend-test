@@ -6,7 +6,7 @@
     :variant="buttonVariant"
     size="x-small"
     :color="buttonColor"
-    class="rounded-sm"
+    class="rounded-sm mx-1"
   >
     <slot></slot>
   </v-btn>
