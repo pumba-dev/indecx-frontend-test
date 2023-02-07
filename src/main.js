@@ -6,4 +6,8 @@ import router from "@/router";
 import "./css/reset.css";
 import "./css/global.css";
 
-createApp(App).use(store).use(router).use(vuetify).mount("#app");
+createApp(App)
+  .use(store)
+  .use(router)
+  .use(vuetify)
+  .mount("#app");

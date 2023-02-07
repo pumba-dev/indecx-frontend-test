@@ -63,24 +63,35 @@
       >
         Fechar
       </DashboardButton>
-      <DashboardButton @click.prevent="createProduct"> Salvar </DashboardButton>
+      <DashboardButton
+        :loading="createIsLoading"
+        :disabled="createIsLoading"
+        @click.prevent="createProduct"
+      >
+        Salvar
+      </DashboardButton>
     </v-sheet>
   </v-card>
 </template>
 
 <script setup>
 import { useStore } from "vuex";
-import { reactive, ref } from "vue";
 import useVuelidate from "@vuelidate/core";
+import { db, auth } from "@/plugins/firebase";
+import { reactive, defineEmits, ref } from "vue";
 import { required } from "@vuelidate/validators";
+import { collection, addDoc } from "firebase/firestore";
 import InputLabel from "@/components/general/forms/InputLabel.vue";
 import TextInput from "@/components/general/forms/TextInput.vue";
 import DashboardButton from "@/components/general/buttons/DashboardButton.vue";
 import DefaultSelect from "../forms/DefaultSelect.vue";
 import productTypesOptions from "@/utils/productTypesOptions";
+import randomString from "@/utils/randomString";
 
 const createIsLoading = ref(false);
 const store = useStore();
+
+const emit = defineEmits(["closeModal"]);
 
 const productFieldsData = reactive({
   name: "",
@@ -103,21 +114,48 @@ const createProductRules = reactive({
 const v$ = useVuelidate(createProductRules, productFieldsData);
 
 async function createProduct() {
-  console.log(productFieldsData);
-
   createIsLoading.value = true;
+
   const formIsValid = await v$.value.$validate();
 
   if (formIsValid) {
-    console.log("Valid");
+    const parsedAPIData = parseDataToAPI();
+    console.log("Create New Product Data: ", parsedAPIData);
+
+    addDoc(collection(db, "products"), parsedAPIData)
+      .then((response) => {
+        console.log("Document written with ID: ", response);
+
+        store.dispatch("notifySystem/create", {
+          text: "Produto criado com sucesso!",
+          iconSrc: "sucess-icon",
+        });
+        emit("closeModal");
+      })
+      .catch((error) => {
+        console.log("ERROR: Document written error: ", error);
+        createIsLoading.value = false;
+      });
   } else {
     store.dispatch("notifySystem/create", {
       text: "Verifique os dados inseridos e tente novamente.",
       iconSrc: "error-icon",
     });
+    createIsLoading.value = false;
   }
+}
 
-  createIsLoading.value = false;
+function parseDataToAPI() {
+  const userUID = auth.currentUser.uid;
+  const randomID = randomString(6);
+
+  return {
+    key: userUID,
+    id: randomID,
+    name: productFieldsData.name,
+    price: productFieldsData.price,
+    type: productFieldsData.type,
+  };
 }
 </script>
 
