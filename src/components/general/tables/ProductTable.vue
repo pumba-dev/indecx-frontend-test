@@ -82,7 +82,11 @@
       <span class="pr-5">{{ navigationText }}</span>
 
       <div class="d-flex justify-space-between">
-        <TableNaviButton v-if="totalOfPages > 1" :background="false">
+        <TableNaviButton
+          @click.prevent="navigation.prevPage"
+          v-if="totalOfPages > 1"
+          :background="false"
+        >
           {{ "<" }}
         </TableNaviButton>
         <TableNaviButton
@@ -115,7 +119,11 @@
           @click.prevent="navigation.goPage(navNumbers.fifth)"
           >{{ navNumbers.fifth }}</TableNaviButton
         >
-        <TableNaviButton v-if="totalOfPages > 1" :background="false">
+        <TableNaviButton
+          @click.prevent="navigation.nextPage"
+          v-if="totalOfPages > 1"
+          :background="false"
+        >
           {{ ">" }}
         </TableNaviButton>
       </div>
@@ -174,7 +182,7 @@ const navigation = {
       currentPage.value++;
     }
   },
-  pravPage: () => {
+  prevPage: () => {
     if (currentPage.value > 1) {
       currentPage.value--;
     }
@@ -189,25 +197,18 @@ const navigation = {
 };
 
 const navNumbers = computed(() => {
-  // Unless 5 Pages or First Page
-  if (totalOfPages.value < 5 || currentPage.value == 1) {
+  // Unless 5 Pages or First Page or Second Page
+  if (
+    totalOfPages.value <= 5 ||
+    currentPage.value == 1 ||
+    currentPage.value == 2
+  ) {
     return {
       first: 1,
       second: 2,
       third: 3,
       fourth: 4,
       fifth: 5,
-    };
-  }
-
-  // Second Page
-  if (currentPage.value == 2) {
-    return {
-      first: 2,
-      second: 3,
-      third: 4,
-      fourth: 5,
-      fifth: 6,
     };
   }
 
@@ -223,7 +224,7 @@ const navNumbers = computed(() => {
   }
 
   // Second Last Page
-  if (currentPage.value == totalOfPages.value) {
+  if (currentPage.value == totalOfPages.value - 1) {
     return {
       first: currentPage.value - 3,
       second: currentPage.value - 2,
