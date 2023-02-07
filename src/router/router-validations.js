@@ -1,12 +1,9 @@
-import { auth } from "@/plugins/firebase";
+import localStorage from "@/utils/localStorage";
 
-export default (to) => {
-  console.log(to);
-  // Validations Constraints
-  const authenticated = auth.currentUser != null;
+export default async (to) => {
+  const authenticated = await localStorage.get("token");
   const isDashboardPath = to.path.match(/\/dashboard/);
 
-  // VALIDATION BEGIN
   if (isDashboardPath && !authenticated) {
     return "login";
   }

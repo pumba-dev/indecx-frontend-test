@@ -54,7 +54,6 @@ const router = createRouter({
 
 // Router Validations
 router.beforeEach((to) => {
-  console.log("Before Enter Router");
   return validations(to);
 });
 
