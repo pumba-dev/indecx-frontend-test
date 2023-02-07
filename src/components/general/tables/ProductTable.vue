@@ -170,7 +170,10 @@ const lastItemPageIndex = computed(() => {
 });
 
 const navigationText = computed(() => {
-  const firstItem = firstItemPageIndex.value + 1;
+  const isEmptyList = props.items.length == 0;
+  const firstItem = isEmptyList
+    ? firstItemPageIndex.value
+    : firstItemPageIndex.value + 1;
   const isLastPage = firstItem + props.itemsPerPage < props.items.length;
   const lastItem = isLastPage
     ? firstItem + props.itemsPerPage - 1
