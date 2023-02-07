@@ -43,7 +43,7 @@ O projeto está em desenvolvimento, então as próximas atualizações serão vo
 - [x] Instalar Bibliotecas [Vuelidate, Axios, Vuetify].
 - [x] Implementar Services da API.
 - [x] Implementar Tela de Login.
-- [ ] Implementar Tela de Redefinir Senha.
+- [x] Implementar Tela de Redefinir Senha.
 - [x] Implementar Tela de Listagem de Produtos.
 - [ ] Implementar Modal de Excluir Produto.
 - [x] Implementar Modal de Criar Produto.
