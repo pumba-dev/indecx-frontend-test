@@ -22,7 +22,7 @@
         }}</v-card-title
       >
       <v-card-subtitle class="text-caption py-0">{{
-        profileData.email
+        profileData.email ? profileData.email : "Nome do Cargo"
       }}</v-card-subtitle>
     </div>
   </v-card>
