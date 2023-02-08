@@ -1,6 +1,5 @@
 import authService from "@/services/authentication";
 import localStorage from "@/utils/localStorage";
-import parseUserProfileDataByAPI from "@/utils/parseUserProfileDataByAPI";
 
 export default {
   namespaced: true,
@@ -33,12 +32,7 @@ export default {
         .then((userCredential) => {
           const token = userCredential.user.accessToken;
           commit("setToken", token);
-          console.log("Passou por Aqui");
-
-          commit(
-            "setProfileData",
-            parseUserProfileDataByAPI(userCredential.user)
-          );
+          commit("setProfileData", userCredential.user);
           localStorage.push("token", token);
 
           return userCredential;

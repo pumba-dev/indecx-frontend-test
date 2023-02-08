@@ -56,7 +56,6 @@
           <InputLabel>Telefone</InputLabel>
           <v-responsive width="270">
             <TextInput
-              disabled
               type="tel"
               v-mask="['(##) ####-####', '(##) #####-####']"
               v-model="profileFieldsData.phone"

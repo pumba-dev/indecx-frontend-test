@@ -127,7 +127,6 @@ async function saveNewProfilePhone() {
       .then((response) => {
         console.log("Sucess Edit Profile Phone Number: ", response);
         saveNewProfileData();
-        emit("closeModal");
       })
       .catch((error) => {
         console.log("Error Edit Profile Phone Number: ", error);
@@ -135,6 +134,9 @@ async function saveNewProfilePhone() {
         switch (error.code) {
           case "auth/invalid-verification-code":
             errorMsg = "O código inserido não é válido.";
+            break;
+          case "auth/code-expired":
+            errorMsg = "O código de confirmação expirou, envie novamente.";
             break;
           default:
             errorMsg = "Erro interno do servidor ao verificar código.";
@@ -146,6 +148,7 @@ async function saveNewProfilePhone() {
           iconSrc: "error-icon",
         });
         confirmPhoneIsLoading.value = false;
+        emit("closeModal");
       });
   } else {
     store.dispatch("notifySystem/create", {
@@ -165,6 +168,7 @@ async function saveNewProfileData() {
         text: "Dados do perfil alterados com sucesso!",
         iconSrc: "sucess-icon",
       });
+      store.dispatch("authSystem/authCurrentUser");
       emit("closeModal");
     })
     .catch((error) => {
@@ -173,6 +177,7 @@ async function saveNewProfileData() {
         text: "Erro interno no servidor ao alterar dados do perfil.",
         iconSrc: "error-icon",
       });
+      emit("closeModal");
     });
 }
 </script>

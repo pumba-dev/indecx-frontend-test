@@ -12,7 +12,6 @@ import {
   PhoneAuthProvider,
 } from "firebase/auth";
 import localStorage from "@/utils/localStorage";
-import parseUserProfileDataByAPI from "@/utils/parseUserProfileDataByAPI";
 
 export default {
   create: (email, password) => {
@@ -50,18 +49,17 @@ export default {
       verificationId,
       phoneCode
     );
-    return updatePhoneNumber(auth, phoneCredential);
+    return updatePhoneNumber(auth.currentUser, phoneCredential);
   },
   resetPassword: (submitCode, newPassword) => {
     return confirmPasswordReset(auth, submitCode, newPassword);
   },
-  hasAuthenticatedUser: (stateCommit) => {
+  hasAuthenticatedUser: (callback) => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         localStorage.push("userUID", user.uid);
-        if (stateCommit) {
-          const profileData = parseUserProfileDataByAPI(user);
-          stateCommit("setProfileData", profileData);
+        if (callback) {
+          callback("setProfileData", user);
         }
       } else {
         localStorage.push("userUID", null);
