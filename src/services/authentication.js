@@ -35,8 +35,6 @@ export default {
       },
       auth
     );
-    console.log(phoneNumber);
-    console.log(applicationVerifier);
     const provider = new PhoneAuthProvider(auth);
     const verificationId = await provider.verifyPhoneNumber(
       `+55${phoneNumber}`,

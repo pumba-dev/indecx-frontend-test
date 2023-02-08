@@ -183,7 +183,7 @@ function setInitialValueForFields() {
   console.log("Edit Profile Data", user.value);
   profileFieldsData.name = user.value.displayName;
   profileFieldsData.email = user.value.email;
-  profileFieldsData.phone = user.value.phoneNumber;
+  profileFieldsData.phone = user.value.phoneNumber.substring(3);
   profileFieldsData.photoURL = user.value.photoURL;
   displayedProfilePhoto.value = user.value.photoURL;
   if (user.value.photoURL == null || user.value.photoURL == "")
@@ -195,7 +195,6 @@ function applyDefaultDisplayPhoto() {
 }
 
 function applyNewDisplayedPhoto(newPhotoUrl) {
-  console.log("newPhotoUrl", newPhotoUrl);
   displayedProfilePhoto.value = newPhotoUrl;
 }
 
@@ -208,9 +207,11 @@ function parseDataToAPI() {
 }
 
 function phoneHasChanged() {
-  console.log(user.value.phoneNumber);
-  console.log(profileFieldsData.phone);
-  return profileFieldsData.phone != user.value.phoneNumber;
+  const savedNumber = user.value.phoneNumber.substring(3);
+  const inputedNumber = onlyNumbers(profileFieldsData.phone);
+  console.log(savedNumber);
+  console.log(inputedNumber);
+  return savedNumber != inputedNumber;
 }
 </script>
 

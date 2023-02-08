@@ -4,6 +4,5 @@ export default (string) => {
     style: "currency",
     currency: "BRL",
   }).format(money);
-  console.log(formatedMoney);
   return formatedMoney;
 };
