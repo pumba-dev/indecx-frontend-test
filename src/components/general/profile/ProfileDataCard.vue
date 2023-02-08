@@ -11,7 +11,7 @@
           event.target.src = require('@/assets/general/no-user-image.png')
         "
         alt="Profile Avatar"
-        :src="avatar"
+        :src="avatar ? avatar : require('@/assets/general/no-user-image.png')"
       ></v-img>
     </v-avatar>
 

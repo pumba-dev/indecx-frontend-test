@@ -18,7 +18,7 @@
 import { useStore } from "vuex";
 import { computed, onBeforeMount } from "vue";
 import UserSettings from "@/components/general/profile/UserSettings.vue";
-import ProfileDataCard from "@/components/general/dashboard/ProfileDataCard.vue";
+import ProfileDataCard from "@/components/general/profile/ProfileDataCard.vue";
 
 const store = useStore();
 
