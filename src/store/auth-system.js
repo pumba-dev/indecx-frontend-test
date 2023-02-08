@@ -1,22 +1,28 @@
 import authService from "@/services/authentication";
 import localStorage from "@/utils/localStorage";
+import parseUserProfileDataByAPI from "@/utils/parseUserProfileDataByAPI";
 
 export default {
   namespaced: true,
   state: {
-    token: null,
+    token: "",
+    profileData: {},
   },
   getters: {
     getToken(state) {
       return state.token;
+    },
+    getProfileData(state) {
+      return state.profileData;
     },
   },
   mutations: {
     setToken(state, token) {
       state.token = token;
     },
-    deleteToken(state) {
-      state.token = null;
+    setProfileData(state, newData) {
+      console.log("setProfileData", newData);
+      state.profileData = newData;
     },
   },
   actions: {
@@ -27,6 +33,12 @@ export default {
         .then((userCredential) => {
           const token = userCredential.user.accessToken;
           commit("setToken", token);
+          console.log("Passou por Aqui");
+
+          commit(
+            "setProfileData",
+            parseUserProfileDataByAPI(userCredential.user)
+          );
           localStorage.push("token", token);
 
           return userCredential;
@@ -42,8 +54,12 @@ export default {
     async signOut({ commit }) {
       localStorage.delete("token");
       commit("setToken", "");
+      commit("setProfileData", {});
       await authService.signOut();
       return true;
+    },
+    async authCurrentUser({ commit }) {
+      authService.hasAuthenticatedUser(commit);
     },
   },
 };

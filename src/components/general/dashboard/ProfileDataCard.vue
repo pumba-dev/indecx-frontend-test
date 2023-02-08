@@ -5,7 +5,14 @@
     variant="text"
   >
     <v-avatar>
-      <v-img alt="Profile Avatar" :src="avatar"></v-img>
+      <v-img
+        cover
+        @error="
+          event.target.src = require('@/assets/general/no-user-image.png')
+        "
+        alt="Profile Avatar"
+        :src="avatar"
+      ></v-img>
     </v-avatar>
 
     <div class="d-flex flex-column justify-center">

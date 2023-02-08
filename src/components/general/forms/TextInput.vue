@@ -14,7 +14,7 @@ import { defineProps } from "vue";
 defineProps({
   error: {
     type: Boolean,
-    required: true,
+    default: false,
   },
   placeholder: {
     type: String,

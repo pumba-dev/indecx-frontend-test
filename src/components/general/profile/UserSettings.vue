@@ -27,14 +27,15 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import openProjectRepo from "@/utils/openProjectRepo";
-import { useRouter } from "vue-router";
 import { useStore } from "vuex";
+import { ref, defineEmits } from "vue";
+import { useRouter } from "vue-router";
+import openProjectRepo from "@/utils/openProjectRepo";
+
+const emit = defineEmits(["openEditProfileModal"]);
 
 const store = useStore();
 const router = useRouter();
-
 const settingOptions = ref([
   { key: "edit-account", title: "Editar conta" },
   { key: "open-project-repo", title: "Visualizar repositório" },
@@ -45,7 +46,7 @@ function handleAction(key) {
   console.log("handleAction", key);
   switch (key) {
     case "edit-account":
-      console.log("edit-account");
+      emit("openEditProfileModal");
       break;
     case "open-project-repo":
       openProjectRepo();

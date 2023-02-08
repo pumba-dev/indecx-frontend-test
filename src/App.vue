@@ -3,6 +3,8 @@
     <router-view></router-view>
 
     <NotifySystem></NotifySystem>
+
+    <div id="recaptcha-container"></div>
   </v-app>
 </template>
 

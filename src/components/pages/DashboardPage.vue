@@ -5,17 +5,20 @@
       :is="currentModal"
       :item="currentModalItem"
       @closeModal="modals.closeModal"
+      @openModal="modals.openModal"
     ></component>
   </v-overlay>
 
-  <DashboardHeader></DashboardHeader>
+  <DashboardHeader
+    @openEditProfileModal="modals.openEditProfileModal"
+  ></DashboardHeader>
 
   <v-main class="bg-background pa-6 d-flex flex-column">
     <h1 class="text-h5 font-weight-bold mb-6">Lista de Produtos</h1>
     <ProductTable
-      @createItem="modals.openCreateModal"
-      @editItem="modals.openEditModal"
-      @deleteItem="modals.openDeleteModal"
+      @createItem="modals.openCreateProductModal"
+      @editItem="modals.openEditProductModal"
+      @deleteItem="modals.openDeleteProductModal"
       :headers="tableHeaders"
       :items="tableItems"
     ></ProductTable>
@@ -29,7 +32,8 @@ import ProductTable from "../general/tables/ProductTable.vue";
 import CreateProductModal from "@/components/general/modal/CreateProductModal.vue";
 import EditProductModal from "@/components/general/modal/EditProductModal.vue";
 import DeleteProductModal from "@/components/general/modal/DeleteProductModal.vue";
-// import productsMock from "@/utils/productsMock";
+import EditProfileModal from "@/components/general/modal/EditProfileModal.vue";
+import ConfirmPhoneModal from "@/components/general/modal/ConfirmPhoneModal.vue";
 import productService from "@/services/products";
 
 onMounted(() => {
@@ -51,18 +55,29 @@ const currentModalItem = ref(null);
 const showModal = ref(false);
 
 const modals = {
-  openCreateModal: () => {
+  openCreateProductModal: () => {
     console.log("Open Create Modal");
     currentModal.value = CreateProductModal;
     showModal.value = true;
   },
-  openEditModal: (item) => {
+  openEditProductModal: (item) => {
     console.log("Open Edit Modal");
     currentModalItem.value = item;
     currentModal.value = EditProductModal;
     showModal.value = true;
   },
-  openDeleteModal: (item) => {
+  openEditProfileModal: () => {
+    console.log("Open Edit Profile Modal");
+    currentModal.value = EditProfileModal;
+    showModal.value = true;
+  },
+  openConfirmPhoneModal: (item) => {
+    currentModalItem.value = item;
+    console.log("Open Edit Profile Modal");
+    currentModal.value = ConfirmPhoneModal;
+    showModal.value = true;
+  },
+  openDeleteProductModal: (item) => {
     console.log("Open Delete Modal");
     currentModalItem.value = item;
     currentModal.value = DeleteProductModal;
@@ -74,6 +89,13 @@ const modals = {
     currentModalItem.value = null;
     showModal.value = false;
     getProductsFromAPI();
+  },
+  openModal: (modal) => {
+    switch (modal.key) {
+      case "confirm-phone":
+        modals.openConfirmPhoneModal(modal.data);
+        break;
+    }
   },
 };
 
