@@ -32,13 +32,18 @@ import { ref, defineEmits } from "vue";
 import { useRouter } from "vue-router";
 import openProjectRepo from "@/utils/openProjectRepo";
 
-const emit = defineEmits(["openEditProfileModal", "addRandomProducts"]);
+const emit = defineEmits([
+  "openEditProfileModal",
+  "addRandomProducts",
+  "deleteAllProducts",
+]);
 
 const store = useStore();
 const router = useRouter();
 const settingOptions = ref([
   { key: "edit-account", title: "Editar conta" },
   { key: "add-random-products", title: "Povoar a Tabela" },
+  { key: "delete-all-products", title: "Reiniciar a Tabela" },
   { key: "open-project-repo", title: "Visualizar repositório" },
   { key: "sign-out", title: "Sair" },
 ]);
@@ -48,6 +53,9 @@ function handleAction(key) {
   switch (key) {
     case "add-random-products":
       emit("addRandomProducts");
+      break;
+    case "delete-all-products":
+      emit("deleteAllProducts");
       break;
     case "edit-account":
       emit("openEditProfileModal");

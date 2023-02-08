@@ -3,6 +3,7 @@
     <UserSettings
       @openEditProfileModal="$emit('openEditProfileModal')"
       @addRandomProducts="$emit('addRandomProducts')"
+      @deleteAllProducts="$emit('deleteAllProducts')"
     ></UserSettings>
 
     <v-divider vertical class="mx-2"></v-divider>

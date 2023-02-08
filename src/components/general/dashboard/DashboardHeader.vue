@@ -19,6 +19,7 @@
     <UserProfile
       @openEditProfileModal="$emit('openEditProfileModal')"
       @addRandomProducts="$emit('addRandomProducts')"
+      @deleteAllProducts="$emit('deleteAllProducts')"
     ></UserProfile>
   </v-app-bar>
 </template>

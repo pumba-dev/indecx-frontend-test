@@ -15,8 +15,8 @@ import localStorage from "@/utils/localStorage";
 export default {
   getAll: () => {
     const userUID = localStorage.get("userUID");
-    const productsRef = collection(db, "products");
-    const queryByKey = query(productsRef, where("key", "==", userUID));
+    const productCollectionRef = collection(db, "products");
+    const queryByKey = query(productCollectionRef, where("key", "==", userUID));
     return getDocs(queryByKey);
   },
   create: async (productData) => {
@@ -39,11 +39,22 @@ export default {
     return batch.commit();
   },
   edit: async (newProductData) => {
-    const productsRef = doc(db, "products", newProductData.id);
-    return updateDoc(productsRef, newProductData);
+    const productCollectionRef = doc(db, "products", newProductData.id);
+    return updateDoc(productCollectionRef, newProductData);
   },
   delete: async (productID) => {
-    const productsRef = doc(db, "products", productID);
-    return await deleteDoc(productsRef);
+    const productCollectionRef = doc(db, "products", productID);
+    return await deleteDoc(productCollectionRef);
+  },
+  deleteAll: async () => {
+    const batch = writeBatch(db);
+    const userUID = localStorage.get("userUID");
+    const productCollectionRef = collection(db, "products");
+    const queryByKey = query(productCollectionRef, where("key", "==", userUID));
+    const userProductsDocs = await getDocs(queryByKey);
+    userProductsDocs.forEach((productDoc) => {
+      batch.delete(productDoc.ref);
+    });
+    return batch.commit();
   },
 };

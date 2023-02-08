@@ -12,6 +12,7 @@
   <DashboardHeader
     @openEditProfileModal="modals.openEditProfileModal"
     @addRandomProducts="addRandomProducts"
+    @deleteAllProducts="deleteAllProducts"
   ></DashboardHeader>
 
   <v-main class="bg-background pa-6 d-flex flex-column">
@@ -124,7 +125,6 @@ async function addRandomProducts() {
   let productsArray = [];
   for (let i = 0; i < productsQuantity; i++) {
     const randomProduct = genRandomProduct();
-    console.log(randomProduct);
     productsArray.push(randomProduct);
   }
 
@@ -132,18 +132,36 @@ async function addRandomProducts() {
     .createMultiple(productsArray)
     .then((response) => {
       console.log("Tabela Povoada: ", response);
-
       store.dispatch("notifySystem/create", {
         text: "Produtos adicionado à tabela com sucesso!",
         iconSrc: "sucess-icon",
       });
-
       getProductsFromAPI();
     })
     .catch((error) => {
       console.log("ERROR: ao povoar tabela: ", error);
       store.dispatch("notifySystem/create", {
         text: "Erro interno no servidor ao povoar tabela.",
+        iconSrc: "error-icon",
+      });
+    });
+}
+
+async function deleteAllProducts() {
+  await productService
+    .deleteAll()
+    .then((response) => {
+      console.log("Tabela Reiniciada com Sucesso: ", response);
+      store.dispatch("notifySystem/create", {
+        text: "Tabela reiniciada com sucesso!",
+        iconSrc: "sucess-icon",
+      });
+      getProductsFromAPI();
+    })
+    .catch((error) => {
+      console.log("ERROR: ao povoar tabela: ", error);
+      store.dispatch("notifySystem/create", {
+        text: "Erro interno no servidor ao reiniciar tabela.",
         iconSrc: "error-icon",
       });
     });
