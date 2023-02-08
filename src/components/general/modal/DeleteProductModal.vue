@@ -3,8 +3,8 @@
     <v-sheet class="pa-2">
       <v-row class="justify-center align-start">
         <v-icon
-          class="ma-2 mt-4"
-          size="x-large"
+          class="ma-1 mt-4"
+          size="45"
           color="error"
           icon="mdi-alert-circle-outline"
         ></v-icon>
