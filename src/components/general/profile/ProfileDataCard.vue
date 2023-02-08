@@ -35,14 +35,8 @@ defineProps({
     type: String,
     default: require("@/assets/general/no-user-image.png"),
   },
-  title: {
-    type: String,
-    require: true,
-  },
-  subtitle: {
-    type: String,
-    require: true,
-  },
+  title: String,
+  subtitle: String,
 });
 </script>
 
