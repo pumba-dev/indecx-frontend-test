@@ -163,8 +163,17 @@ async function saveNewProfileData() {
         })
         .catch((error) => {
           console.log("Error Edit Profile Data: ", error);
+          let errorMsg;
+          switch (error.code) {
+            case "auth/invalid-profile-attribute":
+              errorMsg = "A URL enviada como foto de perfil é muito longa.";
+              break;
+            default:
+              errorMsg = "Erro interno no servidor ao alterar dados do perfil.";
+              break;
+          }
           store.dispatch("notifySystem/create", {
-            text: "Erro interno no servidor ao alterar dados do perfil.",
+            text: errorMsg,
             iconSrc: "error-icon",
           });
         });
@@ -183,7 +192,9 @@ function setInitialValueForFields() {
   console.log("Edit Profile Data", user.value);
   profileFieldsData.name = user.value.displayName;
   profileFieldsData.email = user.value.email;
-  profileFieldsData.phone = user.value.phoneNumber.substring(3);
+  profileFieldsData.phone = user.value.phoneNumber
+    ? user.value.phoneNumber.substring(3)
+    : "";
   profileFieldsData.photoURL = user.value.photoURL;
   displayedProfilePhoto.value = user.value.photoURL;
   if (user.value.photoURL == null || user.value.photoURL == "")
@@ -207,7 +218,9 @@ function parseDataToAPI() {
 }
 
 function phoneHasChanged() {
-  const savedNumber = user.value.phoneNumber.substring(3);
+  const savedNumber = user.value.phoneNumber
+    ? user.value.phoneNumber.substring(3)
+    : "";
   const inputedNumber = onlyNumbers(profileFieldsData.phone);
   console.log(savedNumber);
   console.log(inputedNumber);
