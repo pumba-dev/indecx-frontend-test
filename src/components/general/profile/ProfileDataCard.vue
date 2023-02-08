@@ -7,11 +7,9 @@
     <v-avatar>
       <v-img
         cover
-        @error="
-          event.target.src = require('@/assets/general/no-user-image.png')
-        "
+        @error="photoError = true"
         alt="Profile Avatar"
-        :src="avatar ? avatar : require('@/assets/general/no-user-image.png')"
+        :src="profilePhoto"
       ></v-img>
     </v-avatar>
 
@@ -19,25 +17,31 @@
       <v-card-title
         style="line-height: normal"
         class="text-subtitle-1 font-weight-bold py-0"
-        >{{ title }}</v-card-title
+        >{{
+          profileData.displayName ? profileData.displayName : "Nome Sobrenome"
+        }}</v-card-title
       >
       <v-card-subtitle class="text-caption py-0">{{
-        subtitle
+        profileData.email
       }}</v-card-subtitle>
     </div>
   </v-card>
 </template>
 
 <script setup>
-import { defineProps } from "vue";
-defineProps({
-  avatar: {
-    type: String,
-    default: require("@/assets/general/no-user-image.png"),
-  },
-  title: String,
-  subtitle: String,
+import { defineProps, ref, computed } from "vue";
+const props = defineProps({
+  profileData: { type: Object, required: true },
 });
+
+const photoError = ref(false);
+const profilePhoto = computed(() => {
+  if (!photoError.value && props.profileData.photoURL) {
+    return props.profileData.photoURL;
+  }
+  return defaultPhoto;
+});
+const defaultPhoto = require("@/assets/general/no-user-image.png");
 </script>
 
 <style></style>
