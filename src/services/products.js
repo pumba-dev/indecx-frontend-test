@@ -6,6 +6,7 @@ import {
   getDocs,
   updateDoc,
   deleteDoc,
+  writeBatch,
   collection,
 } from "firebase/firestore";
 import { db } from "@/plugins/firebase";
@@ -24,6 +25,18 @@ export default {
       key: userUID,
       ...productData,
     });
+  },
+  createMultiple: (productsArray) => {
+    const batch = writeBatch(db);
+    const userUID = localStorage.get("userUID");
+    productsArray.forEach((product) => {
+      const productRef = doc(db, "products", product.id);
+      batch.set(productRef, {
+        key: userUID,
+        ...product,
+      });
+    });
+    return batch.commit();
   },
   edit: async (newProductData) => {
     const productsRef = doc(db, "products", newProductData.id);

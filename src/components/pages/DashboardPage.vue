@@ -11,6 +11,7 @@
 
   <DashboardHeader
     @openEditProfileModal="modals.openEditProfileModal"
+    @addRandomProducts="addRandomProducts"
   ></DashboardHeader>
 
   <v-main class="bg-background pa-6 d-flex flex-column">
@@ -26,6 +27,7 @@
 </template>
 
 <script setup>
+import { useStore } from "vuex";
 import { ref, shallowRef, onMounted } from "vue";
 import DashboardHeader from "../general/dashboard/DashboardHeader.vue";
 import ProductTable from "../general/tables/ProductTable.vue";
@@ -35,6 +37,9 @@ import DeleteProductModal from "@/components/general/modal/DeleteProductModal.vu
 import EditProfileModal from "@/components/general/modal/EditProfileModal.vue";
 import ConfirmPhoneModal from "@/components/general/modal/ConfirmPhoneModal.vue";
 import productService from "@/services/products";
+import randomNumber from "@/utils/randomNumber";
+import randomString from "@/utils/randomString";
+import productTypesOptions from "@/utils/productTypesOptions";
 
 onMounted(() => {
   // tableItems.value = productsMock;
@@ -48,8 +53,8 @@ const tableHeaders = ref([
   { title: "Valor do Produto", key: "price", mask: "money" },
 ]);
 
+const store = useStore();
 const tableItems = ref([]);
-
 const currentModal = shallowRef(null);
 const currentModalItem = ref(null);
 const showModal = ref(false);
@@ -111,6 +116,49 @@ function getProductsFromAPI() {
     .catch((error) => {
       console.log(error);
     });
+}
+
+async function addRandomProducts() {
+  const productsQuantity = 10;
+
+  let productsArray = [];
+  for (let i = 0; i < productsQuantity; i++) {
+    const randomProduct = genRandomProduct();
+    console.log(randomProduct);
+    productsArray.push(randomProduct);
+  }
+
+  await productService
+    .createMultiple(productsArray)
+    .then((response) => {
+      console.log("Tabela Povoada: ", response);
+
+      store.dispatch("notifySystem/create", {
+        text: "Produtos adicionado à tabela com sucesso!",
+        iconSrc: "sucess-icon",
+      });
+
+      getProductsFromAPI();
+    })
+    .catch((error) => {
+      console.log("ERROR: ao povoar tabela: ", error);
+      store.dispatch("notifySystem/create", {
+        text: "Erro interno no servidor ao povoar tabela.",
+        iconSrc: "error-icon",
+      });
+    });
+}
+
+function genRandomProduct() {
+  const randomID = randomString(6);
+  const randomPrice = randomNumber(100, 10000).toFixed(2);
+  const randomType = productTypesOptions[parseInt(randomNumber(0, 3))];
+  return {
+    id: randomID,
+    name: "Produto Aleatório",
+    price: randomPrice,
+    type: randomType,
+  };
 }
 </script>
 

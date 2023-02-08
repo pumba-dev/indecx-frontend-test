@@ -18,6 +18,7 @@
 
     <UserProfile
       @openEditProfileModal="$emit('openEditProfileModal')"
+      @addRandomProducts="$emit('addRandomProducts')"
     ></UserProfile>
   </v-app-bar>
 </template>

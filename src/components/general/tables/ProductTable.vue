@@ -134,7 +134,7 @@
 </template>
 
 <script setup>
-import { defineProps, ref, computed } from "vue";
+import { defineProps, ref, computed, watch } from "vue";
 import TableNaviButton from "@/components/general/buttons/TableNaviButton";
 import DashboardButton from "@/components/general/buttons/DashboardButton.vue";
 import moneyFormat from "@/utils/moneyFormat";
@@ -156,6 +156,10 @@ const props = defineProps({
 
 const tableSearch = ref("");
 const currentPage = ref(1);
+
+watch(props.items, () => {
+  currentPage.value = 1;
+});
 
 const totalOfPages = computed(() => {
   return Math.ceil(props.items.length / props.itemsPerPage);

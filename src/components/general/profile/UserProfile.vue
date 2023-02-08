@@ -2,6 +2,7 @@
   <div class="d-flex flex-row align-center">
     <UserSettings
       @openEditProfileModal="$emit('openEditProfileModal')"
+      @addRandomProducts="$emit('addRandomProducts')"
     ></UserSettings>
 
     <v-divider vertical class="mx-2"></v-divider>
