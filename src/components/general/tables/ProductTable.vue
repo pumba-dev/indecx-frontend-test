@@ -1,7 +1,7 @@
 <template>
   <v-sheet class="h-100 bg-surface rounded-md pa-10">
     <!-- Table Header -->
-    <v-row class="justify-space-between mb-6">
+    <v-row class="justify-space-between mb-6 mx-1">
       <v-responsive max-width="260">
         <v-text-field
           v-model="tableSearch"
