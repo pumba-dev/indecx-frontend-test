@@ -6,7 +6,7 @@
 ![GitHub forks](https://img.shields.io/github/forks/pumba-dev/indecx-frontend-test?style=for-the-badge)
 ![Bitbucket open pull requests](https://img.shields.io/github/issues-pr/pumba-dev/indecx-frontend-test?style=for-the-badge)
 
-<h2 align="center">☕ Projeto Em Andamento</h2>
+<h2 align="center">☕ Projeto Concluído</h2>
 
 <img src="./src/assets/general/homepage-screenshot.png" alt="Imagem da Home do Site."/>
 
